@@ -37,7 +37,7 @@ export const getCurrentUserInfo = async (): Promise<User | null> => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      credential: "include",
+      credentials: "include",
     },
   });
 
