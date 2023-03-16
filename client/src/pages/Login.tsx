@@ -3,11 +3,11 @@ import { getCurrentUserInfo, login } from "../api/login";
 import { useRouter } from "../hooks/useRouter";
 
 // TODO 3-2.: 이미 로그인된 유저인지 판별
-const isLoggedIn = async (): Promise<boolean> => {
-  const resProfile = await getCurrentUserInfo();
+// const isLoggedIn = async (): Promise<boolean> => {
+//   const resProfile = await getCurrentUserInfo();
 
-  return resProfile ? true : false;
-};
+//   return resProfile ? true : false;
+// };
 
 const Login = () => {
   const { routeTo } = useRouter();
@@ -19,7 +19,7 @@ const Login = () => {
     const formData = new FormData(event.currentTarget);
 
     // TODO 3-2.: 이미 로그인된 상태라면 page-a로 라우팅
-    const loggedInState = await isLoggedIn();
+    const loggedInState = await getCurrentUserInfo();
     if (loggedInState !== null) {
       routeTo("/page-a");
       return;
