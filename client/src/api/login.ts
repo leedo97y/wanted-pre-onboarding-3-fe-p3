@@ -41,9 +41,5 @@ export const getCurrentUserInfo = async (): Promise<User | null> => {
     },
   });
 
-  if (profileRes) {
-    return profileRes.json();
-  }
-
-  return null;
+  return profileRes ? profileRes.json() : null;
 };
