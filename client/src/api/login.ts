@@ -1,11 +1,11 @@
-import { User } from '../types/user'
-import { BASE_URL } from './const'
+import { User } from "../types/user";
+import { BASE_URL } from "./const";
 
-type LoginResult = 'success' | 'fail'
+type LoginResult = "success" | "fail";
 
 export interface LoginRequest {
-  username: string
-  password: string
+  username: string;
+  password: string;
 }
 
 export const login = async (args: LoginRequest): Promise<LoginResult> => {
@@ -13,13 +13,37 @@ export const login = async (args: LoginRequest): Promise<LoginResult> => {
   // body에는 { username, password }가 들어가야 함
   // 사용하는 기술에 맞추어 적절히 withCredential 설정하기
 
-  return 'fail'
-}
+  const loginRes = await fetch(`${BASE_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      credential: "include",
+    },
+    body: JSON.stringify(args),
+  });
+
+  if (loginRes.ok) {
+    return "success";
+  }
+
+  return "fail";
+};
 
 export const getCurrentUserInfo = async (): Promise<User | null> => {
   // TODO 3-2: GET, '/profile' 호출
   // 호출 성공시 유저 정보 반환
   // 마찬가지로 사용하는 기술에 맞추어 적절히 withCredential 설정하기
+  const profileRes = await fetch(`${BASE_URL}/profile`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      credential: "include",
+    },
+  });
 
-  return null
-}
+  if (profileRes) {
+    return profileRes.json();
+  }
+
+  return null;
+};
