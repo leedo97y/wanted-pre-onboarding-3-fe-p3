@@ -17,7 +17,7 @@ export const login = async (args: LoginRequest): Promise<LoginResult> => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      credential: "include",
+      credentials: "include",
     },
     body: JSON.stringify(args),
   });
